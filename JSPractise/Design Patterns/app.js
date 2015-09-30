@@ -3,36 +3,37 @@ Constructer
 Scope,Bind
 addEventListener
 */
-var App=function (){
-	this.num=0;
-	var self=this;
-	this.bindEvents=function(){
+var App=function () {
+
+	var self = this;
+
+	self.num = 0;
+	
+	self.bindEvents = function() {
 
 		var inc=document.getElementById('inc');
-		inc.addEventListener('click',
-			function(){
-				self.increment();
-			});
+		inc.addEventListener('click',self.increment);
 
 		var dec=document.getElementById('dec')
-		dec.addEventListener('click',this.decrement.bind(self));
+		dec.addEventListener('click',self.decrement);
 
 	}
 
-	this.increment=function(){
-		++this.num;
-		this.updateRes();
+	self.increment = function() {
+		++self.num;
+		self.updateRes();
 	}
 
-	this.decrement=function(){
-		--this.num;
-		this.updateRes();
+	self.decrement = function() {
+		--self.num;
+		self.updateRes();
 	}
 
-	this.updateRes=function(){
-		document.getElementById('res').innerHTML=this.num;
+	self.updateRes = function() {
+		document.getElementById('res').innerHTML=self.num;
 	}
 }
 
-var app=new App;
+
+var app = new App;
 app.bindEvents();
