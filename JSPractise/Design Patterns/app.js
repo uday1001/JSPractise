@@ -16,7 +16,7 @@ var App=function () {
 
 		var dec=document.getElementById('dec')
 		dec.addEventListener('click',self.decrement);
-
+		self.updateRes();
 	}
 
 	self.increment = function() {
