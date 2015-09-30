@@ -1,5 +1,7 @@
 /*
 Constructer
+Scope,Bind
+addEventListener
 */
 var App=function () {
 
