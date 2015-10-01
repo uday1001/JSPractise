@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        /*#userForm {
+            border: 1px solid;
+            display: inline-block;
+            padding: 10px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+            .row {
+            height: 30px;
+        }
+        .filedWidth {
+              width: 120px;
+            display: inline-block;
+        }
+            label {
+            width: 120px;
+            display: inline-block;
+        }
+
+        input {
+            height: 25px;
+        }
+
+            input[type="submit"], input[type="reset"] {
+                width: 120px;
+            }*/
+    </style>
+</head>
+<body>
+    <form id="userForm">
+        <div class="row">
+            <label>Name:</label>
+            <input type="text" id="inpName" />
+        </div>
+        <div class="row">
+            <label>Password:</label>
+            <input type="password" id="inpPass" />
+        </div>
+        <div class="row">
+            <label>Email:</label>
+            <input type="email" id="inpEmail" />
+        </div>
+        <div class="row">
+
+            <input type="submit" value="Submit" />
+            <input type="reset" />
+        </div>
+    </form>
+    <script>
+        function applySomeThing(data, css) {
+            var cssKeys = Object.keys(css);
+            if (data.style) {
+                for (var j = 0; j < cssKeys.length; j++) {
+                    data.style[cssKeys[j]] = css[cssKeys[j]];
+                }
+            } else {
+                for (var i = 0; i < data.length; i++) {
+                    var currentRowObj = data[i];
+                    if (currentRowObj.style) {
+                        for (var j = 0; j < cssKeys.length; j++) {
+                            currentRowObj.style[cssKeys[j]] = css[cssKeys[j]];
+                        }
+                    }
+                }
+            }
+        }
+        var userForm = document.getElementById('userForm');
+        applySomeThing(userForm, { border: "1px solid #000", display: "inline-block", 'box-sizing': "border-box", padding: " 10px" });
+
+        var row = document.querySelectorAll('.row');
+        applySomeThing(row, { height: "30px" });
+
+
+        var rowLabel = document.querySelectorAll('.row label');
+        applySomeThing(rowLabel, { width: "120px", display: "inline-block" });
+
+        var rowInput = document.querySelectorAll('.row input');
+        applySomeThing(rowInput, { height: "25px" });
+
+        var rowBtns = document.querySelectorAll('input[type="submit"], input[type="reset"]');
+        applySomeThing(rowInput, { width: "120px" });
+
+    </script>
+</body>
+</html>
