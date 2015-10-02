@@ -40,8 +40,8 @@ var App=function () {
 };
 
 
-var app = new App ;
-app.init();
+
+App.init();
 
 
 // var inc=document.getElementById('inc');

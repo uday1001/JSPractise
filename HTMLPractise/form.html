@@ -28,21 +28,41 @@
             input[type="submit"], input[type="reset"] {
                 width: 120px;
             }*/
+        .error {
+            border: 1px solid red;
+        }
+        /*#reurltDiv li {
+            float: left;
+        }*/
+       /* #reurltDiv li:nth-child(even) {
+            color: red;
+            clear: both;
+        }
+         #reurltDiv li:nth-child(odd) {
+            color: red;
+            clear: both;
+        }*/
+        #reurltDiv li{
+            display: inline-block;
+            width: 200px;
+        }
     </style>
 </head>
 <body>
+
+    <ul id="reurltDiv"></ul>
     <form id="userForm">
         <div class="row">
             <label>Name:</label>
-            <input type="text" id="inpName" />
+            <input type="text" id="inpName" data-name='Name'/>
         </div>
         <div class="row">
             <label>Password:</label>
-            <input type="password" id="inpPass" />
+            <input type="password" id="inpPass" data-name="Password" />
         </div>
         <div class="row">
             <label>Email:</label>
-            <input type="email" id="inpEmail" />
+            <input type="text" id="inpEmail" data-name="Email" />
         </div>
         <div class="row">
 
@@ -51,7 +71,7 @@
         </div>
     </form>
     <script>
-        function applySomeThing(data, css) {
+        function applyStyles(data, css) {
             var cssKeys = Object.keys(css);
             if (data.style) {
                 for (var j = 0; j < cssKeys.length; j++) {
@@ -68,22 +88,83 @@
                 }
             }
         }
+
+        function removeClass(data, cssClass) {
+            var cssKeys = Object.keys(cssClass);
+              if (data.style) {
+                     if(data.classList.contains(cssClass)) {
+                        var clsArr = (data.classList.remove(cssClass) == undefined) ? [] : data.classList ;
+                        clsArr.join(" ");
+                        data.className = clsArr.join(" "); 
+                    }
+              }else{
+                for (var j = 0; j < cssKeys.length; j++) {
+                    if(data.classList.contains(cssClass)) {
+                        var clsArr = (data.classList.remove(cssClass) == undefined) ? [] : data.classList ;
+                        clsArr.join(" ");
+                        data.className = clsArr.join(" "); 
+                    }
+                }
+            }
+                
+            
+        }
+        function addClass(data, cssClass) {
+            var cssKeys = Object.keys(cssClass);
+            for (var j = 0; j < cssKeys.length; j++) {
+                if (data.classList.contains(cssClass))
+                    return false;
+                var clsArr = data.classList.push(cssClass);
+                data.className = clsArr.join(" "); 
+            }
+        }
         var userForm = document.getElementById('userForm');
-        applySomeThing(userForm, { border: "1px solid #000", display: "inline-block", 'box-sizing': "border-box", padding: " 10px" });
+        applyStyles(userForm, { border: "1px solid #000", display: "inline-block", 'box-sizing': "border-box", padding: " 10px" });
 
         var row = document.querySelectorAll('.row');
-        applySomeThing(row, { height: "30px" });
+        applyStyles(row, { height: "30px" });
 
 
         var rowLabel = document.querySelectorAll('.row label');
-        applySomeThing(rowLabel, { width: "120px", display: "inline-block" });
+        applyStyles(rowLabel, { width: "120px", display: "inline-block" });
 
         var rowInput = document.querySelectorAll('.row input');
-        applySomeThing(rowInput, { height: "25px" });
+        applyStyles(rowInput, { height: "25px" });
 
         var rowBtns = document.querySelectorAll('input[type="submit"], input[type="reset"]');
-        applySomeThing(rowInput, { width: "120px" });
+        applyStyles(rowInput, { width: "120px" });
 
+        var resultData = document.getElementById("reurltDiv");
+        applyStyles(resultData, { "padding-left": "0px" });
+
+        userForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            getData();
+        })
+        function getData() {
+            var data = document.querySelectorAll('#userForm input:not([type=reset]):not([type=submit])');
+            
+            resultData.innerHTML = "";
+
+            for (var i = 0; i < data.length; i++) {
+                var current = data[i];
+                if (current.value.trim()) {
+                    removeClass(current, "error");
+                    var li = document.createElement('li');
+                    var li2 = document.createElement('li');
+                    var br = document.createElement('br');
+                    
+                    li.innerHTML = current.value.trim();
+                    li2.innerHTML = current.getAttribute('data-name');
+                    
+                    document.getElementById('reurltDiv').appendChild(li2);
+                    document.getElementById('reurltDiv').appendChild(li);
+                    document.getElementById('reurltDiv').appendChild(br);
+                } else {
+                    current.className = "error";
+                }
+            }
+        }
     </script>
 </body>
 </html>
